@@ -23,9 +23,7 @@ export default function Input({
       <input
         readOnly={readOnly}
         type={type}
-        className={`border ${
-          error ? "border-red-400" : "border-gray-300"
-        } rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400  transition ${className}`}
+        className={`bg-transparent border border-white rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-white/70 transition placeholder-white/70 text-white ${className}`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -43,7 +41,7 @@ export default function Input({
       />
       {helperText && (
         <span
-          className={`text-xs mt-1 ${error ? "text-red-500" : "text-gray-500"}`}
+          className={`text-xs mt-1 ${error ? "text-red-500" : "text-gray-300"}`}
         >
           {helperText}
         </span>

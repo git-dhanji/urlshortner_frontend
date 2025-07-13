@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const axiosInstance = axios.create({
   baseURL: "http://localhost:4000",
+  withCredentials: true, // Allow cookies to be sent with requests
 });
 
 // Add a response interceptor for error handling
