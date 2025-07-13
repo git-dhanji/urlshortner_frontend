@@ -1,14 +1,21 @@
-export default function Toast({ message, type = "success", onClose }) {
+export default function Toast({
+  message,
+  type = "success",
+  onClose,
+  className = "",
+}) {
   return (
-    <div
-      className={`fixed top-6 bg-center z-50 px-4 py-2 rounded shadow-lg text-white text-sm font-semibold transition-all animate-fade-in ${
-        type === "success" ? "bg-green-600" : "bg-red-600"
-      }`}
-    >
-      {message}
-      <button onClick={onClose} className="ml-4 text-white font-bold">
-        ×
-      </button>
+    <div className="w-full flex justify-center ">
+      <div
+        className={`font-space-gro top-6 z-50 px-4 py-2 rounded shadow-lg text-white  text-sm font-semibold transition-all animate-fade-in ${
+          type === "success" ? "bg-green-600" : "bg-red-600"
+        }`}
+      >
+        {message}
+        <button onClick={onClose} className="ml-4 text-white font-bold">
+          ×
+        </button>
+      </div>
     </div>
   );
 }

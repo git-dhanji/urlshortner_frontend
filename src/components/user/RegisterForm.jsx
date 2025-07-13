@@ -51,11 +51,11 @@ export default function RegisterForm({state}) {
         />
       )}
       <form
-        className="w-full max-w-md mx-auto flex flex-col gap-6 p-6 bg-slate-800 rounded-2xl shadow-2xl mt-10 animate-fade-in"
+        className="w-full font-poppins max-w-md mx-auto flex flex-col gap-6 animate-fade-in"
         onSubmit={handleSubmit}
         autoComplete="off"
       >
-        <h2 className="text-2xl font-bold text-center text-blue-700 mb-2">
+        <h2 className="text-xl text-center font-space-gro font-bold text-amber-50 mb-2">
           Create your account
         </h2>
         <Input
@@ -90,9 +90,9 @@ export default function RegisterForm({state}) {
           disabled={loading}
           className="w-full mt-2"
         />
-        <div className="text-center text-gray-500 text-xs mt-2">
+        <div className="text-center text-gray-200 text-xs mt-2">
           Already have an account?{" "}
-          <span onClick={() => state(true)} className="text-blue-600 hover:underline cursor-pointer">
+          <span onClick={() => state(true)} className="text-blue-400 pl-1 hover:underline cursor-pointer">
             Login
           </span>
         </div>

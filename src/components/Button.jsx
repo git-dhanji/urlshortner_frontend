@@ -17,7 +17,7 @@ function Button({
       type={type}
       disabled={disabled || loading}
       aria-label={ariaLabel || text}
-      className={`relative flex items-center justify-center gap-2 px-4 py-2 rounded font-semibold border transition focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 shadow-sm
+      className={`relative flex items-center justify-center gap-2 px-4 py-2 rounded font-semibold border transition focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 shadow-sm cursor-pointer font-space-gro
         ${
           disabled || loading
             ? "opacity-60 cursor-not-allowed bg-cyan-100"

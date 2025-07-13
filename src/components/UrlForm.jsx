@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input } from "../components/Index.components";
+import { Button, Input } from "./Index";
 
 import { createShortUrl } from "../apis/createShortUrl.Api";
 
