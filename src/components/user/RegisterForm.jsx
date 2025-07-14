@@ -2,22 +2,21 @@ import { useState } from "react";
 import Input from "../Input";
 import Button from "../Button";
 import axiosInstance from "../../utils/axiosInstance.utils";
-import Toast from "../Toast";
+import { useNavigate } from "@tanstack/react-router";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/slice/authslice";
+import ToastMessage from "../../utils/toast";
 
-
-export default function RegisterForm({state}) {
-  const [form, setForm] = useState({ username: "username", email: "example@gmail.com", password: "password" });
-  const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState({
-    show: false,
-    message: "",
-    type: "success",
+export default function RegisterForm({ state }) {
+  const [form, setForm] = useState({
+    username: "username",
+    email: "example@gmail.com",
+    password: "password",
   });
+  const [loading, setLoading] = useState(false);
 
-  const showToast = (message, type = "success") => {
-    setToast({ show: true, message, type });
-    setTimeout(() => setToast({ show: false, message: "", type }), 3000);
-  };
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -27,13 +26,14 @@ export default function RegisterForm({state}) {
     e.preventDefault();
     setLoading(true);
     try {
-      console.log("Registering user with data:", form);
-      await axiosInstance.post("/api/auth/register", form);
-      
-      showToast("Registration successful!", "success");
+      const { data } = await axiosInstance.post("/api/auth/register", form);
+      const user = data.user;
+      dispatch(login(user));
+      navigate({ to: "/user/dashboard" });
+      ToastMessage("welcome mr -" + user.username);
       setForm({ username: "", email: "", password: "" });
     } catch (err) {
-      showToast(err.message || "Registration failed", "error");
+      ToastMessage(err.message || "error while registering");
     } finally {
       setLoading(false);
     }
@@ -41,15 +41,6 @@ export default function RegisterForm({state}) {
 
   return (
     <>
-      {toast.show && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={() =>
-            setToast({ show: false, message: "", type: "success" })
-          }
-        />
-      )}
       <form
         className="w-full font-poppins max-w-md mx-auto flex flex-col gap-6 animate-fade-in"
         onSubmit={handleSubmit}
@@ -92,7 +83,10 @@ export default function RegisterForm({state}) {
         />
         <div className="text-center text-gray-200 text-xs mt-2">
           Already have an account?{" "}
-          <span onClick={() => state(true)} className="text-blue-400 pl-1 hover:underline cursor-pointer">
+          <span
+            onClick={() => state(true)}
+            className="text-blue-400 pl-1 hover:underline cursor-pointer"
+          >
             Login
           </span>
         </div>

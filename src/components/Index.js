@@ -5,5 +5,6 @@ import Toast from "./Toast";
 import LoginForm from "./user/LoginForm";
 import RegisterForm from "./user/RegisterForm";
 import Logo from "./logos/WebLogo";
+import Badge from "./logos/Badge";
 
-export { Logo, Button, Input, UrlForm, Toast, LoginForm, RegisterForm };
+export { Badge, Logo, Button, Input, UrlForm, Toast, LoginForm, RegisterForm };

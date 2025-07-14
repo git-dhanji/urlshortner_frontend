@@ -1,21 +1,29 @@
-export default function Toast({
-  message,
-  type = "success",
-  onClose,
-  className = "",
-}) {
+// components/Toast.jsx
+import { useEffect, useState } from "react";
+
+export const Toast = ({ message, duration = 3000, onClose }) => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(false);
+      setTimeout(() => onClose?.(), 300); // wait for animation
+    }, duration);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!visible) return null;
+
   return (
-    <div className="w-full flex justify-center ">
-      <div
-        className={`font-space-gro top-6 z-50 px-4 py-2 rounded shadow-lg text-white  text-sm font-semibold transition-all animate-fade-in ${
-          type === "success" ? "bg-green-600" : "bg-red-600"
-        }`}
-      >
-        {message}
-        <button onClick={onClose} className="ml-4 text-white font-bold">
-          ×
-        </button>
+    <div className="fixed top-15 right-0 z-50">
+      <div className="bg-[#1F2937]/60 backdrop-blur-md text-[#F9FAFB] pl-2 pr-4 py-3 rounded-sm shadow-lg border border-[#374151] animate-slideDown flex items-center gap-4">
+        <div className="h-2 w-2 rounded-full bg-[#34D399] animate-ping"></div>
+        <span className="md:text-sm font-space-gro text-white">
+          {message}
+        </span>
       </div>
     </div>
   );
-}
+};
+
+export default Toast;

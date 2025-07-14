@@ -1,14 +1,18 @@
 import { LoginForm, RegisterForm } from "../components/Index";
 import { useState } from "react";
 
+
+
 export default function AuthPage() {
   const [login, setLogin] = useState(true);
 
   return (
     <div className="dark:bg-slate-950 min-h-screen w-full flex justify-center items-center p-4">
       <div className="w-full max-w-[90%] sm:max-w-md md:max-w-lg xl:max-w-xl">
-        <div className="relative w-full bg-black mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-sky-500/30 blur-3xl" />
+        <div className="relative w-full mx-auto">
+          <div
+            className={`absolute inset-0 bg-gradient-to-r  from-indigo-800/100 to-gray-950 blur-3xl`}
+          />
 
           <div className="relative w-full flex flex-col p-6 sm:p-8 rounded-2xl overflow-hidden backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] bg-gradient-to-br from-white/10 to-white/5">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-sky-500/5" />

@@ -1,39 +1,38 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Input, Button } from "../Index";
 import axiosInstance from "../../utils/axiosInstance.utils";
-import Toast from "../Toast";
+import { login } from "../../store/slice/authslice";
+import { useNavigate } from "@tanstack/react-router";
+import ToastMessage from "../../utils/toast";
 
 export default function LoginForm({ state }) {
   const [form, setForm] = useState({
-    email: "example@gmail.com",
-    password: "password",
+    email: "demo@gmail.cp",
+    password: "demo123",
   });
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState({
-    show: false,
-    message: "",
-    type: "success",
-  });
-
-  const showToast = (message, type = "success") => {
-    setToast({ show: true, message, type });
-    setTimeout(() => setToast({ show: false, message: "", type }), 1800);
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  //call login
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const data = await axiosInstance.post("/api/auth/login", form);
-      console.log("Login successful:", data);
-      showToast("Login successful!", "success");
+      const { data } = await axiosInstance.post("/api/auth/login", form);
+      const user = data.user;
+      dispatch(login(user));
+      navigate({ to: "/user/dashboard" });
+      ToastMessage(`${user.username} login success`);
       setForm({ email: "", password: "" });
     } catch (err) {
-      showToast(err.message || "Login failed", "error");
+      ToastMessage(`login failed`);
     } finally {
       setLoading(false);
     }
@@ -41,15 +40,6 @@ export default function LoginForm({ state }) {
 
   return (
     <>
-      {toast.show && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={() =>
-            setToast({ show: false, message: "", type: "success" })
-          }
-        />
-      )}
       <form
         className="w-full  max-w-md mx-auto flex flex-col gap-6 rounded-2xl"
         onSubmit={handleSubmit}

@@ -18,6 +18,17 @@ export const loginUser = async (email, password) => {
 };
 
 export const logoutUser = async () => {
-  const response = await axiosInstance.post("/api/auth/logout");
+  const response = await axiosInstance.get("/api/auth/logout");
   return response;
+};
+
+export const getCurrentUserData = async () => {
+  try {
+    const { data } = await axiosInstance.get("/api/auth/me", {
+      withCredentials: true,
+    });
+    return data.user;
+  } catch (error) {
+    throw new Error(error);
+  }
 };

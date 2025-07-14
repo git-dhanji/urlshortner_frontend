@@ -2,12 +2,7 @@ import { createRoute } from "@tanstack/react-router";
 
 import { AuthPage, Dashboard, HomePage } from "../pages";
 import { rootRoute } from "./RouteTree";
-
-const authRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/auth",
-  component: AuthPage,
-});
+import checkAuth from "../utils/helper";
 
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -15,10 +10,17 @@ const homeRoute = createRoute({
   component: HomePage,
 });
 
+const authRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/auth",
+  component: AuthPage,
+});
+
 const dashboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/user/dashboard",
   component: Dashboard,
+  beforeLoad: checkAuth,
 });
 
 export { dashboardRoute, homeRoute, authRoute };
