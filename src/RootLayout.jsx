@@ -6,6 +6,8 @@ import { getCurrentUserData } from "./apis/user.apis";
 import { useDispatch } from "react-redux";
 import { login } from "./store/slice/authslice";
 import ToastMessage from "./utils/toast";
+import Footer from "./pages/Footer";
+import FeaturesPage from "./pages/FeaturesPage";
 export function Empty() {
   return <div className="h-16 w-full -z-10"></div>;
 }
@@ -19,7 +21,7 @@ export default function RootLayout() {
           dispatch(login(user));
           ToastMessage(`welcome back ${user.username}`)
         } else redirect({ to: "/auth" });
-      } catch (err) {}
+      } catch (err) { }
     };
 
     fetchUser();
@@ -30,6 +32,8 @@ export default function RootLayout() {
       <Navbar />
       <Empty />
       <Outlet />
+      <FeaturesPage />
+      <Footer />
     </>
   );
 }

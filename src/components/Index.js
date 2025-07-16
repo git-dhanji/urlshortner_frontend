@@ -8,4 +8,36 @@ import Logo from "./logos/WebLogo";
 import Badge from "./logos/Badge";
 import BoxForm from "./BoxForm";
 import Form from "./Form";
-export {BoxForm,Form, Badge, Logo, Button, Input, UrlForm, Toast, LoginForm, RegisterForm };
+import FeaturesSection from "./sections/FeaturesSection";
+import FooterSection from "./sections/FooterSection";
+import CTASection from "./sections/CTASection";
+import TrustSection from "./sections/TrustSection";
+import HeroSection from "./sections/HeroSection";
+import HowItsWorksSection from "./sections/HowItsWorksSection";
+import CTAButton, { PrimaryCTA, SecondaryCTA, OutlineCTA, GetStartedCTA, LearnMoreCTA, DashboardCTA } from "./buttons/CTAButton";
+
+export {
+  HowItsWorksSection,
+  HeroSection,
+  TrustSection,
+  FooterSection,
+  FeaturesSection,
+  CTASection,
+  CTAButton,
+  PrimaryCTA,
+  SecondaryCTA,
+  OutlineCTA,
+  GetStartedCTA,
+  LearnMoreCTA,
+  DashboardCTA,
+  BoxForm,
+  Form,
+  Badge,
+  Logo,
+  Button,
+  Input,
+  UrlForm,
+  Toast,
+  LoginForm,
+  RegisterForm
+};
