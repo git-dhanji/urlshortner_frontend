@@ -6,5 +6,6 @@ import LoginForm from "./user/LoginForm";
 import RegisterForm from "./user/RegisterForm";
 import Logo from "./logos/WebLogo";
 import Badge from "./logos/Badge";
-
-export { Badge, Logo, Button, Input, UrlForm, Toast, LoginForm, RegisterForm };
+import BoxForm from "./BoxForm";
+import Form from "./Form";
+export {BoxForm,Form, Badge, Logo, Button, Input, UrlForm, Toast, LoginForm, RegisterForm };

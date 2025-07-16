@@ -17,7 +17,7 @@ export default function RootLayout() {
         const user = await getCurrentUserData();
         if (user) {
           dispatch(login(user));
-          ToastMessage('user');
+          ToastMessage(`welcome back ${user.username}`)
         } else redirect({ to: "/auth" });
       } catch (err) {}
     };

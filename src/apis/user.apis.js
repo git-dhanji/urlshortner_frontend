@@ -32,3 +32,14 @@ export const getCurrentUserData = async () => {
     throw new Error(error);
   }
 };
+
+export const userAllUrls = async () => {
+  try {
+    const { data } = await axiosInstance.get("/api/urls/allUrls", {
+      withCredentials: true,
+    });
+    return data.user;
+  } catch (error) {
+    console.log(error);
+  }
+};
