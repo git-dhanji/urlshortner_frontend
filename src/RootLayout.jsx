@@ -7,9 +7,8 @@ import { useDispatch } from "react-redux";
 import { login } from "./store/slice/authslice";
 import ToastMessage from "./utils/toast";
 import Footer from "./pages/Footer";
-import FeaturesPage from "./pages/FeaturesPage";
 export function Empty() {
-  return <div className="h-16 w-full -z-10"></div>;
+  return <div id="home" className="h-16 w-full -z-10"></div>;
 }
 export default function RootLayout() {
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ export default function RootLayout() {
       <Navbar />
       <Empty />
       <Outlet />
-      <FeaturesPage />
+      {/* <FeaturesPage /> */}
       <Footer />
     </>
   );

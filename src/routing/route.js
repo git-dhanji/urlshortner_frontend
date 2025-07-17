@@ -3,6 +3,7 @@ import { createRoute } from "@tanstack/react-router";
 import { AuthPage, Dashboard, HomePage } from "../pages";
 import { rootRoute } from "./RouteTree";
 import checkAuth from "../utils/helper";
+import SignupPage from "../pages/SignupPage";
 
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -22,5 +23,9 @@ const dashboardRoute = createRoute({
   component: Dashboard,
   beforeLoad: checkAuth,
 });
-
-export { dashboardRoute, homeRoute, authRoute };
+const SignupRoute =createRoute({
+  getParentRoute:()=>rootRoute,
+  path:'/signup',
+  component:SignupPage,
+})
+export { dashboardRoute, homeRoute, authRoute,SignupRoute };

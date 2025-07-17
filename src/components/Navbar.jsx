@@ -36,11 +36,11 @@ export default function Navbar() {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { name: "Home", href: "/", icon: "🏠" },
-    { name: "Features", href: "/features", icon: "⚡" },
-    { name: "Pricing", href: "/pricing", icon: "💎" },
-    { name: "About", href: "/about", icon: "ℹ️" },
-    { name: "Contact", href: "/contact", icon: "📧" },
+    { name: "Home", href: "#home", icon: "🏠" },
+    { name: "Features", href: "#features", icon: "⚡" },
+    { name: "Pricing", href: "#pricing", icon: "💎" },
+    { name: "Devtools", href: "#devtools", icon: "ℹ️" },
+    { name: "Contact", href: "#contact", icon: "📧" },
   ];
 
   const authenticatedLinks = [
@@ -73,9 +73,6 @@ export default function Navbar() {
                   className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50"
                 >
                   <span className="flex items-center space-x-2">
-                    {/* <span className="text-sm group-hover:scale-110 transition-transform duration-200">
-                      {link.icon}
-                    </span> */}
                     <span>{link.name}</span>
                   </span>
                   <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-green-700 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-2xl"></div>
@@ -165,7 +162,8 @@ export default function Navbar() {
               ) : (
                 <div className="hidden sm:flex items-center space-x-3">
                   <Link
-                    to="/login"
+
+                    to="/auth"
                     className="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors duration-200"
                   >
                     Sign In

@@ -6,7 +6,7 @@ import SocialLinks from "./SocialLinks";
 
 const links = [
   { label: "Home", url: "/" },
-  { label: "About", url: "/about" },
+  { label: "Devtools", url: "#devtools" },
   { label: "Contact", url: "/contact" },
   { label: "Custom Urls", url: "/custom" }
 ]

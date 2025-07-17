@@ -107,7 +107,7 @@ export default function FeaturesSection() {
             </section>
 
             {/* Pricing Tiers Preview */}
-            <section>
+            <section id="pricing">
                 <PricingSection />
             </section>
         </div>

@@ -1,6 +1,30 @@
+
+const pricing = [
+    {
+        name: "Free",
+        price: "$0",
+        period: "forever",
+        features: ["1,000 links/month", "Basic analytics", "Standard support"],
+        popular: false
+    },
+    {
+        name: "Pro",
+        price: "$9",
+        period: "per month",
+        features: ["Unlimited links", "Advanced analytics", "Custom domains", "Priority support"],
+        popular: true
+    },
+    {
+        name: "Enterprise",
+        price: "Custom",
+        period: "pricing",
+        features: ["Everything in Pro", "Team collaboration", "API access", "Dedicated support"],
+        popular: false
+    }
+]
 export default function PricingSection() {
     return (
-        <section className="py-20 px-4">
+        <section className="py-20 pt-30 px-4">
             <div className="max-w-7xl mx-auto text-center">
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-space-grotesk">
                     Choose Your Plan
@@ -10,29 +34,7 @@ export default function PricingSection() {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {[
-                        {
-                            name: "Free",
-                            price: "$0",
-                            period: "forever",
-                            features: ["1,000 links/month", "Basic analytics", "Standard support"],
-                            popular: false
-                        },
-                        {
-                            name: "Pro",
-                            price: "$9",
-                            period: "per month",
-                            features: ["Unlimited links", "Advanced analytics", "Custom domains", "Priority support"],
-                            popular: true
-                        },
-                        {
-                            name: "Enterprise",
-                            price: "Custom",
-                            period: "pricing",
-                            features: ["Everything in Pro", "Team collaboration", "API access", "Dedicated support"],
-                            popular: false
-                        }
-                    ].map((plan, idx) => (
+                    {pricing.map((plan, idx) => (
                         <div key={idx} className={`relative p-8 rounded-2xl border transition-all duration-300 hover:transform hover:scale-105 ${plan.popular
                             ? 'bg-gradient-to-b from-indigo-500/10 to-purple-500/10 border-indigo-500/50'
                             : 'bg-slate-800/30 border-slate-700/50 hover:border-indigo-500/30'
@@ -59,7 +61,7 @@ export default function PricingSection() {
                                     </li>
                                 ))}
                             </ul>
-                            <button className={`w-full py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${plan.popular
+                            <button className={`w-full cursor-pointer py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${plan.popular
                                 ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:from-indigo-400 hover:to-purple-500'
                                 : 'bg-slate-700 text-white hover:bg-slate-600'
                                 }`}>

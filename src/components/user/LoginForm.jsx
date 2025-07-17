@@ -41,6 +41,7 @@ export default function LoginForm({ state }) {
   return (
     <>
       <form
+      id="login"
         className="w-full  max-w-md mx-auto flex flex-col gap-6 rounded-2xl"
         onSubmit={handleSubmit}
         autoComplete="off"
