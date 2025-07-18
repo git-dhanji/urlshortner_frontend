@@ -57,8 +57,7 @@ export default function UrlForm({ onSubmit }) {
 
   return (
     <>
-     
-        <Form onSubmit={handleSubmit} headerText="Shortly short url">
+        <Form onSubmit={handleSubmit} >
           <div className="w-full flex flex-col gap-8 ">
             <Input
               type="text"

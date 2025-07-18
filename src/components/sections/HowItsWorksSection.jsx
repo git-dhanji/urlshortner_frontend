@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 export default function HowItsWorksSection() {
     return (
-        <section className="py-50 px-4 bg-slate-900/50">
+        <section className="md:py-50 py-20 px-4 bg-slate-900/50">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 font-space-grotesk">

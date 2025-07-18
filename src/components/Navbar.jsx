@@ -3,6 +3,7 @@ import { Badge, Logo } from "./Index";
 import { Link } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
 import { useSelector } from "react-redux";
+import AvatarLogo from "./logos/AvatarLogo";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -150,11 +151,7 @@ export default function Navbar() {
                 <div className="flex items-center space-x-3">
 
                   <div className="relative group">
-                    <Badge
-                      url={user?.avatar}
-                      className="cursor-pointer ring-2 ring-slate-700 hover:ring-indigo-500 transition-all duration-300 transform group-hover:scale-105"
-                      onClick={() => navigate({ to: "/dashboard" })}
-                    />
+                    <AvatarLogo />
                     {/* Dropdown indicator */}
                     <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-slate-900 rounded-full"></div>
                   </div>

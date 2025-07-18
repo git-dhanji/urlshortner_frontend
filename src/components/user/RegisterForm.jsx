@@ -2,12 +2,12 @@ import { useState } from "react";
 import Input from "../Input";
 import Button from "../Button";
 import axiosInstance from "../../utils/axiosInstance.utils";
-import { useNavigate } from "@tanstack/react-router";
+import { redirect, useNavigate } from "@tanstack/react-router";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/slice/authslice";
 import ToastMessage from "../../utils/toast";
 
-export default function RegisterForm({ state }) {
+export default function RegisterForm({ state, withRedirect, onClick }) {
   const [form, setForm] = useState({
     username: "username",
     email: "example@gmail.com",
@@ -27,6 +27,7 @@ export default function RegisterForm({ state }) {
     setLoading(true);
     try {
       const { data } = await axiosInstance.post("/api/auth/register", form);
+      console.log("data", data)
       const user = data.user;
       dispatch(login(user));
       navigate({ to: "/user/dashboard" });
@@ -81,15 +82,26 @@ export default function RegisterForm({ state }) {
           disabled={loading}
           className="w-full mt-2"
         />
-        <div className="text-center text-gray-200 text-xs mt-2">
-          Already have an account?{" "}
-          <span
-            onClick={() => state(true)}
-            className="text-blue-400 pl-1 hover:underline cursor-pointer"
-          >
-            Login
-          </span>
-        </div>
+        {
+          withRedirect ? (<div className="text-center text-gray-200 text-xs mt-2">
+            Already have an account?{" "}
+            <span
+              onClick={onClick}
+              className="text-blue-400 pl-1 hover:underline cursor-pointer"
+            >
+              Login
+            </span>
+          </div>) : (<div className="text-center text-gray-200 text-xs mt-2">
+            Already have an account?{" "}
+            <span
+              onClick={() => state(true)}
+              className="text-blue-400 pl-1 hover:underline cursor-pointer"
+            >
+              Login
+            </span>
+          </div>)
+        }
+
       </form>
     </>
   );

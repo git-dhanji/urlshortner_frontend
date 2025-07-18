@@ -43,8 +43,8 @@ const CoreFeature = () => {
 
 export default function FeaturesSection() {
     return (
-        <div className="bg-slate-950 min-h-screen">
-            <section className="relative overflow-hidden py-20 px-4">
+        <div className="bg-slate-950 min-h-screen transition-all ease-in">
+            <section className="relative overflow-hidden md:py-20 px-4">
                 <div className="max-w-7xl mx-auto text-center">
                     {/* Background decorations */}
                     <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
@@ -54,13 +54,13 @@ export default function FeaturesSection() {
                     </div>
 
                     <div className="relative z-10">
-                        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white font-space-grotesk">
+                        <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white font-space-grotesk">
                             Powerful
                             <span className="text-center pl-3 bg-gradient-to-r from-indigo-400 via-purple-400 to-emerald-400 bg-clip-text text-transparent">
                                 Features
                             </span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+                        <p className="text-lg md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
                             Discover everything QuickLink has to offer. From basic URL shortening to advanced analytics and team collaboration.
                         </p>
 
@@ -78,7 +78,7 @@ export default function FeaturesSection() {
             </section>
 
             {/* Core Features Section */}
-            <section className="py-20 px-4">
+            <section className="md:py-20 px-4">
                 <div className="max-w-7xl mx-auto pb-10">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-space-grotesk">

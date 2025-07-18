@@ -5,6 +5,7 @@ import TrustSection from "./TrustSection";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import CTAButtons from "./CTAButtons";
+import InputWithButton from "../box/InputWithButton";
 
 export default function HeroSection() {
     const [typedText, setTypedText] = useState("");
@@ -39,12 +40,12 @@ export default function HeroSection() {
 
     return (
         <section className="relative min-h-screen  flex flex-col items-center justify-center px-4 text-center">
-            <div className="max-w-7xl mx-auto flex flex-col items-center justify-center">
+            <div className="max-w-7xl  flex flex-col items-center justify-center">
                 {/* Badge */}
-                <Badge />
+                <Badge className="mb-4" />
                 {/* Main Heading */}
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 font-space-grotesk">
-                    <span className="block text-white mb-4">Shorten URLs</span>
+                <h1 className="text-5xl text-center md:text-7xl lg:text-8xl font-bold mb-4 font-space-grotesk">
+                    <span className="block text-center text-white mb-4">Shorten URLs</span>
                     <span className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-emerald-400 bg-clip-text text-transparent">
                         {typedText}
                         <span className="animate-pulse">|</span>
@@ -54,14 +55,14 @@ export default function HeroSection() {
                 {/* Subtitle */}
                 <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed animate-slideUp">
                     Transform your long, messy URLs into clean, professional short links.
-                    <span className="block mt-2 text-indigo-300 font-semibold">
-                        Track clicks • Boost engagement • Build trust
-                    </span>
+
+                    <span><Badge text="" child={<div><span className="text-red-300"><span className="text-emerald-100">From</span> : https:www.longurl.com/converany</span> <span className="text-green-500"><span className="text-emerald-100">To</span> : tny.com/abcd</span></div>} /></span>
                 </p>
 
                 {/* URL Shortener Form */}
-                <div className="mb-16 animate-slideUp" style={{ animationDelay: '0.2s' }}>
-                    <UrlForm />
+                <div className="mb-16 animate-slideUp  w-full" style={{ animationDelay: '0.2s' }}>
+                    {/* <UrlForm /> */}
+                    <InputWithButton />
                 </div>
 
                 {/* Trust Indicators */}

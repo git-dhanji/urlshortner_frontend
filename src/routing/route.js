@@ -23,9 +23,17 @@ const dashboardRoute = createRoute({
   component: Dashboard,
   beforeLoad: checkAuth,
 });
-const SignupRoute =createRoute({
-  getParentRoute:()=>rootRoute,
-  path:'/signup',
-  component:SignupPage,
+
+
+const userLoggedRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/user',
+  component: HomePage,
 })
-export { dashboardRoute, homeRoute, authRoute,SignupRoute };
+
+const SignupRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/signup',
+  component: SignupPage,
+})
+export { dashboardRoute, homeRoute, authRoute, SignupRoute,userLoggedRoute };

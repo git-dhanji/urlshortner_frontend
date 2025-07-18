@@ -23,7 +23,7 @@ export default function Input({
       <input
         readOnly={readOnly}
         type={type}
-        className={`bg-transparent border border-white rounded-lg px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-white/70 transition placeholder-white/70 text-white ${className}`}
+        className={`bg-transparent border border-white rounded-lg px-4 py-3 w-full focus:outline-none  transition placeholder-white/70 text-white ${className}`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

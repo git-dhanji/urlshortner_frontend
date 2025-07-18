@@ -1,5 +1,6 @@
 
-import { FeaturesSection, CTASection, HeroSection, HowItsWorksSection } from "../components/Index";
+import { FeaturesSection, HeroSection, HowItsWorksSection } from "../components/Index";
+import ContactSection from "../components/sections/ContactSection";
 import TestimonialSection from "../components/sections/TestimonialSection";
 
 function HomePage() {
@@ -23,6 +24,9 @@ function HomePage() {
       {/* Social Proof Section */}
       <section className="py-20 px-4 bg-slate-900/30">
         <TestimonialSection />
+      </section>
+      <section id="contact">
+        <ContactSection />
       </section>
     </div>
   );
