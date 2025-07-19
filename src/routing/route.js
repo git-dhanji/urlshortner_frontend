@@ -40,7 +40,7 @@ const signupRoute = createRoute({
 
 const analyticsRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/user/analytics',
+  path: '/user/analytics/$shortId',
   component: AnalyticsPage,
   beforeLoad: checkAuth,
 })

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useParams } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
     LineChart,
@@ -21,12 +20,14 @@ import {
 import BgEffect from "../effects/BgEffect";
 import fetchAnalytics from "../../apis/analytics.api";
 import AnalyticsHeader from "./AnalyticsHeader";
+import { useDispatch } from "react-redux";
+import { setAnalyticsData } from "../../store/slice/analyticsSlice";
 
 
-export default function AnalyticsMainSections() {
-    // const { shortId } = useParams();
-    const shortId='asdfjaslk'
+export default function AnalyticsMainSections({ shortId }) {
+
     const [activeTab, setActiveTab] = useState("overview");
+    const dispatch = useDispatch();
 
     const tabs = [
         { id: "overview", name: "Overview", icon: "📊" },
@@ -45,6 +46,8 @@ export default function AnalyticsMainSections() {
         queryKey: ["analytics", shortId],
         queryFn: () => fetchAnalytics(shortId),
     });
+
+    dispatch(setAnalyticsData(analytics));
 
 
     if (isLoading) {
@@ -76,6 +79,7 @@ export default function AnalyticsMainSections() {
 
 
 
+  
     return (
         <div className="min-h-screen bg-slate-950">
             {/* Background Effects */}
@@ -86,7 +90,7 @@ export default function AnalyticsMainSections() {
                     {/* Header */}
                     <AnalyticsHeader
                         timeRanges={timeRanges}
-                        analyticsShortUrl="shortly.ly/short"
+                        analyticsShortUrl={analytics?.url?.shortUrl}
                         analyticsLongUrl="https://www.longurl.com/somepara/en-hi"
                     />
                     {/* Navigation Tabs */}

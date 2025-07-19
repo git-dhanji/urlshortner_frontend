@@ -53,11 +53,11 @@ export default function HeroSection() {
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed animate-slideUp">
+                <div className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto mb-12 leading-relaxed animate-slideUp">
                     Transform your long, messy URLs into clean, professional short links.
 
                     <span><Badge text="" child={<div><span className="text-red-300"><span className="text-emerald-100">From</span> : https:www.longurl.com/converany</span> <span className="text-green-500"><span className="text-emerald-100">To</span> : tny.com/abcd</span></div>} /></span>
-                </p>
+                </div>
 
                 {/* URL Shortener Form */}
                 <div className="mb-16 animate-slideUp  w-full" style={{ animationDelay: '0.2s' }}>

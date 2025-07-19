@@ -7,11 +7,13 @@ import AvatarLogo from "./logos/AvatarLogo";
 
 export default function Navbar() {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
+  
   const navigate = useNavigate();
-
+  const shortId = ''
   const { isDarkMode } = { isDarkMode: true }
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
   // const [toggleTheme, setToggleTheme] = useState(false)
   const toggleTheme = () => {
     alert("make this")
@@ -46,8 +48,8 @@ export default function Navbar() {
   ];
 
   const authenticatedLinks = [
-    { name: "Analytics", href: "user/analytics", icon: "📈" },
-    { name: "CustomUrls", href: "user/custom", icon: "🔗" },
+    { name: "Analytics", href: `user/analytics/${shortId ? shortId : 'checks'}`, icon: "📈" },
+    { name: "Dashboard", href: "user/dashboard", icon: "🔗" },
   ];
 
   return (

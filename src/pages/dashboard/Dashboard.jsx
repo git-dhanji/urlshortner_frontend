@@ -386,11 +386,12 @@ export default function Dashboard() {
                             {copiedIndex === index ? 'Copied!' : 'Copy'}
                           </button>
                           <Link
-                            to={`/analytics/${url._id}`}
+                            to={`/user/analytics/${url.short_url}`}
                             className="px-3 py-2 text-sm bg-indigo-500/20 text-indigo-300 rounded-lg hover:bg-indigo-500/30 transition-all duration-200"
                           >
                             📊
                           </Link>
+
                         </div>
                       </>
                     ) : (
@@ -421,7 +422,7 @@ export default function Dashboard() {
                               {copiedIndex === index ? 'Copied!' : 'Copy'}
                             </button>
                             <Link
-                              to={`/analytics/${url._id}`}
+                              to={`/user/analytics/${url.short_url}`}
                               className="px-3 py-2 text-sm bg-indigo-500/20 text-indigo-300 rounded-lg hover:bg-indigo-500/30 transition-all duration-200"
                             >
                               Analytics
