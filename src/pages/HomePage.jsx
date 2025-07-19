@@ -1,6 +1,5 @@
 
-import { FeaturesSection, HeroSection, HowItsWorksSection } from "../components/Index";
-import ContactSection from "../components/sections/ContactSection";
+import { FeaturesSection, HeroSection, HowItsWorksSection, ContactSection } from "../components/Index";
 import TestimonialSection from "../components/sections/TestimonialSection";
 
 function HomePage() {

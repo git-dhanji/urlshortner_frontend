@@ -15,14 +15,18 @@ import TrustSection from "./sections/TrustSection";
 import HeroSection from "./sections/HeroSection";
 import HowItsWorksSection from "./sections/HowItsWorksSection";
 import CTAButton, { PrimaryCTA, SecondaryCTA, OutlineCTA, GetStartedCTA, LearnMoreCTA, DashboardCTA } from "./buttons/CTAButton";
+import AnalyticsHeader from "./analytics/AnalyticsHeader";
+import ContactSection from "./sections/ContactSection";
 
 export {
+  AnalyticsHeader,
   HowItsWorksSection,
   HeroSection,
   TrustSection,
   FooterSection,
   FeaturesSection,
   CTASection,
+  ContactSection,
   CTAButton,
   PrimaryCTA,
   SecondaryCTA,

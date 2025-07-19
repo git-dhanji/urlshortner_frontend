@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Badge, UrlForm } from "../../components/Index";
+import { UrlForm } from "../../components/Index";
 import { logoutUser } from "../../apis/user.apis";
 import { logout } from "../../store/slice/authslice";
 import { useNavigate } from "@tanstack/react-router";
 import ReToast from "../../utils/toast";
 import { userAllUrls } from "../../apis/user.apis";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import AvatarLogo from "../../components/logos/AvatarLogo";
 
 export default function Dashboard() {
   const [copiedIndex, setCopiedIndex] = useState(null);
@@ -23,6 +24,10 @@ export default function Dashboard() {
     queryFn: userAllUrls,
     refetchInterval: 30000,
   });
+
+
+
+  console.log(data, isLoading);
 
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -60,10 +65,6 @@ export default function Dashboard() {
     dispatch(logout());
     navigate({ to: "/" });
     ReToast("logout successfully", 2000);
-  };
-
-  const handleClick = () => {
-    navigate({ to: "/" });
   };
 
   const copyToClipboard = (text, index) => {
@@ -119,7 +120,7 @@ export default function Dashboard() {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
           <div className="flex items-center space-x-4 mb-6 lg:mb-0">
             <div className="relative">
-              <Badge url={user?.avatar} className="w-16 h-16 ring-4 ring-indigo-500/20" />
+              <AvatarLogo url={user?.avatar} />
               <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 border-2 border-slate-950 rounded-full"></div>
             </div>
             <div>
@@ -344,8 +345,8 @@ export default function Dashboard() {
                   <div
                     key={url._id}
                     className={`group relative ${viewMode === 'grid'
-                        ? 'bg-slate-700/30 p-6 rounded-xl border border-slate-600/50 hover:border-indigo-500/50 transition-all duration-300 hover:transform hover:scale-105'
-                        : 'flex items-center justify-between p-4 bg-slate-700/30 rounded-xl border border-slate-600/50 hover:border-indigo-500/50 transition-all duration-300'
+                      ? 'bg-slate-700/30 p-6 rounded-xl border border-slate-600/50 hover:border-indigo-500/50 transition-all duration-300 hover:transform hover:scale-105'
+                      : 'flex items-center justify-between p-4 bg-slate-700/30 rounded-xl border border-slate-600/50 hover:border-indigo-500/50 transition-all duration-300'
                       }`}
                   >
                     {/* Selection checkbox */}
@@ -369,16 +370,17 @@ export default function Dashboard() {
                           </p>
                           <div className="flex items-center justify-between text-sm text-gray-400">
                             <span>{url.clicks} clicks</span>
-                            <span>{new Date(url.createdAt).toLocaleDateString()}</span>
+                            <span className="text-green-400">{new Date(url.createdAt).toLocaleDateString()
+                              || 89}</span>
                           </div>
                         </div>
 
                         <div className="flex items-center space-x-2">
                           <button
-                            onClick={() => copyToClipboard(url.short_url, index)}
+                            onClick={() => copyToClipboard(url?.redirect_url, index)}
                             className={`flex-1 px-3 py-2 text-sm rounded-lg font-medium transition-all duration-200 ${copiedIndex === index
-                                ? 'bg-emerald-500 text-white'
-                                : 'bg-slate-600/50 text-gray-300 hover:bg-slate-600 hover:text-white'
+                              ? 'bg-emerald-500 text-white'
+                              : 'bg-slate-600/50 text-gray-300 hover:bg-slate-600 hover:text-white'
                               }`}
                           >
                             {copiedIndex === index ? 'Copied!' : 'Copy'}
@@ -412,8 +414,8 @@ export default function Dashboard() {
                             <button
                               onClick={() => copyToClipboard(url.short_url, index)}
                               className={`px-3 py-2 text-sm rounded-lg font-medium transition-all duration-200 ${copiedIndex === index
-                                  ? 'bg-emerald-500 text-white'
-                                  : 'bg-slate-600/50 text-gray-300 hover:bg-slate-600 hover:text-white'
+                                ? 'bg-emerald-500 text-white'
+                                : 'bg-slate-600/50 text-gray-300 hover:bg-slate-600 hover:text-white'
                                 }`}
                             >
                               {copiedIndex === index ? 'Copied!' : 'Copy'}

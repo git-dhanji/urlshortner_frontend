@@ -6,8 +6,9 @@ import { useSelector } from "react-redux";
 import AvatarLogo from "./logos/AvatarLogo";
 
 export default function Navbar() {
-  const navigate = useNavigate();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
   const { isDarkMode } = { isDarkMode: true }
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,8 +46,8 @@ export default function Navbar() {
   ];
 
   const authenticatedLinks = [
-    { name: "Analytics", href: "/analytics", icon: "📈" },
-    { name: "CustomUrls", href: "/custom", icon: "🔗" },
+    { name: "Analytics", href: "user/analytics", icon: "📈" },
+    { name: "CustomUrls", href: "user/custom", icon: "🔗" },
   ];
 
   return (
@@ -151,7 +152,10 @@ export default function Navbar() {
                 <div className="flex items-center space-x-3">
 
                   <div className="relative group">
-                    <AvatarLogo />
+                    <AvatarLogo
+                      url={user?.avatar}
+                      onClick={() => navigate({ to: '/user/dashboard' })}
+                    />
                     {/* Dropdown indicator */}
                     <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-slate-900 rounded-full"></div>
                   </div>

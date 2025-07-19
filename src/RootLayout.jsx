@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { login } from "./store/slice/authslice";
 import ToastMessage from "./utils/toast";
 import Footer from "./pages/Footer";
+
 export function Empty() {
   return <div id="home" className="h-16 w-full -z-10"></div>;
 }
