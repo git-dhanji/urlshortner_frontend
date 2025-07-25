@@ -1,3 +1,5 @@
+
+
 export default function DeveloperSection() {
     return (
         <section id="devtools" className="py-20 pt-30 px-4">

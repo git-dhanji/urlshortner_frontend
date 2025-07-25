@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { sendContactData } from '../../apis/contacts.api'
 
 export default function ContactSection() {
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
+        fullName: '',
+        emailAddress: '',
         subject: '',
         message: ''
     });
+
+    const { fullName, emailAddress, subject, message } = formData;
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
 
@@ -21,11 +24,20 @@ export default function ContactSection() {
         e.preventDefault();
         setIsSubmitting(true);
 
+        try {
+            await sendContactData(fullName, emailAddress, subject, message);
+            setSubmitStatus('success');
+        } catch (error) {
+            setSubmitStatus('error');
+        } finally {
+            setIsSubmitting(false);
+        }
+
         // Simulate form submission
         setTimeout(() => {
             setIsSubmitting(false);
             setSubmitStatus('success');
-            setFormData({ name: '', email: '', subject: '', message: '' });
+            setFormData({ fullName: '', emailAddress: '', subject: '', message: '' });
 
             // Reset status after 3 seconds
             setTimeout(() => setSubmitStatus(null), 3000);
@@ -160,8 +172,8 @@ export default function ContactSection() {
                                         <input
                                             type="text"
                                             id="name"
-                                            name="name"
-                                            value={formData.name}
+                                            name="fullName"
+                                            value={formData.fullName}
                                             onChange={handleChange}
                                             required
                                             className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
@@ -175,8 +187,8 @@ export default function ContactSection() {
                                         <input
                                             type="email"
                                             id="email"
-                                            name="email"
-                                            value={formData.email}
+                                            name="emailAddress"
+                                            value={formData.emailAddress}
                                             onChange={handleChange}
                                             required
                                             className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"

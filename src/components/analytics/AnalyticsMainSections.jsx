@@ -29,19 +29,6 @@ export default function AnalyticsMainSections({ shortId }) {
     const [activeTab, setActiveTab] = useState("overview");
     const dispatch = useDispatch();
 
-    const tabs = [
-        { id: "overview", name: "Overview", icon: "📊" },
-        { id: "traffic", name: "Traffic", icon: "🚦" },
-        { id: "devices", name: "Devices", icon: "📱" },
-        { id: "locations", name: "Locations", icon: "🌍" },
-    ];
-
-    const timeRanges = [
-        { value: "24h", label: "Last 24 Hours" },
-        { value: "7d", label: "Last 7 Days" },
-        { value: "30d", label: "Last 30 Days" },
-        { value: "90d", label: "Last 90 Days" },
-    ];
     const { data: analytics, isLoading, error } = useQuery({
         queryKey: ["analytics", shortId],
         queryFn: () => fetchAnalytics(shortId),
@@ -79,7 +66,7 @@ export default function AnalyticsMainSections({ shortId }) {
 
 
 
-  
+
     return (
         <div className="min-h-screen bg-slate-950">
             {/* Background Effects */}
@@ -462,3 +449,20 @@ export default function AnalyticsMainSections({ shortId }) {
         </div>
     );
 }
+
+
+
+const tabs = [
+    { id: "overview", name: "Overview", icon: "📊" },
+    { id: "traffic", name: "Traffic", icon: "🚦" },
+    { id: "devices", name: "Devices", icon: "📱" },
+    { id: "locations", name: "Locations", icon: "🌍" },
+];
+
+
+const timeRanges = [
+    { value: "24h", label: "Last 24 Hours" },
+    { value: "7d", label: "Last 7 Days" },
+    { value: "30d", label: "Last 30 Days" },
+    { value: "90d", label: "Last 90 Days" },
+];

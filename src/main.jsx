@@ -1,6 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import "./index.css";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
@@ -17,10 +18,14 @@ const router = createRouter({
   },
 });
 
+
 createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  </Provider>
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </Provider>
+  </GoogleOAuthProvider>
+
 );

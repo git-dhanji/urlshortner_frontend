@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button";
 import Input from "../Input";
 import { useSelector } from "react-redux";
 import { createShortUrl, createShortUrlWithUser } from "../../apis/createShortUrl.Api";
+import ToastMessage from "../../utils/toast";
+import isValidURL from "../../apis/validator";
 
 export default function InputWithButton() {
-    const [url, setUrl] = useState("https://www.google.com");
+    const [url, setUrl] = useState("");
     const [slug, setSlug] = useState("");
     const [shortUrl, setShortUrl] = useState("");
     const [copied, setCopied] = useState(false);
     const [loading, setLoading] = useState(false);
     const { user, isAuthenticated } = useSelector((state) => state.auth);
 
+    const [validUrl, setValidUrl] = useState(false);
 
+   
     const handleSubmit = async (e) => {
         setLoading(true);
         setShortUrl("");
@@ -50,6 +54,11 @@ export default function InputWithButton() {
         }
     };
 
+
+    useEffect(() => {
+        setValidUrl(isValidURL(url))
+    }, [url])
+
     return (
         <div>
             <div className="max-w-7xl flex flex-col md:px-0 px-10 justify-center items-center">
@@ -69,7 +78,7 @@ export default function InputWithButton() {
                             text={loading ? "Shortening..." : "Short Url"}
                             type="submit"
                             loading={loading}
-                            disabled={!url}
+                            disabled={!validUrl}
                         />
                     </div>
                 </div>

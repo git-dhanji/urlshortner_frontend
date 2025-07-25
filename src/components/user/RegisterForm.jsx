@@ -9,9 +9,9 @@ import ToastMessage from "../../utils/toast";
 
 export default function RegisterForm({ state, withRedirect, onClick }) {
   const [form, setForm] = useState({
-    username: "username",
-    email: "example@gmail.com",
-    password: "password",
+    username: "",
+    email: "@gmail.com",
+    password: "demo123",
   });
   const [loading, setLoading] = useState(false);
 

@@ -41,7 +41,7 @@ const CoreFeature = () => {
     )
 }
 
-export default function FeaturesSection() {
+export default function FeaturesSection({ isPriceSectionInclude = true }) {
     return (
         <div className="bg-slate-950 min-h-screen transition-all ease-in">
             <section className="relative overflow-hidden md:py-20 px-4">
@@ -107,8 +107,11 @@ export default function FeaturesSection() {
             </section>
 
             {/* Pricing Tiers Preview */}
-            <section id="pricing">
-                <PricingSection />
+            <section id={`${isPriceSectionInclude ? 'pricing' : ''}`}>
+                {
+                    isPriceSectionInclude && <PricingSection />
+                }
+
             </section>
         </div>
     )

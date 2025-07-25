@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { UrlForm } from "../../components/Index";
-import { logoutUser } from "../../apis/user.apis";
-import { logout } from "../../store/slice/authslice";
+import { getCurrentUserData, logoutUser } from "../../apis/user.apis";
+import { login, logout } from "../../store/slice/authslice";
 import { useNavigate } from "@tanstack/react-router";
 import ReToast from "../../utils/toast";
 import { userAllUrls } from "../../apis/user.apis";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import AvatarLogo from "../../components/logos/AvatarLogo";
 
 export default function Dashboard() {
+  const queryClient = useQueryClient();
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,8 +19,11 @@ export default function Dashboard() {
   const [showUrlForm, setShowUrlForm] = useState(false);
   const [selectedUrls, setSelectedUrls] = useState([]);
   const [viewMode, setViewMode] = useState('grid'); // grid or list
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { data, isLoading, error } = useQuery({
+
+  const { data, isLoading } = useQuery({
     queryKey: ["userUrls"],
     queryFn: userAllUrls,
     refetchInterval: 30000,
@@ -27,12 +31,8 @@ export default function Dashboard() {
 
 
 
-  console.log(data, isLoading);
-
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+  console.log(user)
   // Filter and sort URLs
   const filteredUrls = data?.filter(url =>
     url.redirect_url.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -125,7 +125,7 @@ export default function Dashboard() {
             </div>
             <div>
               <h1 className="text-3xl font-bold text-white mb-1">
-                Welcome back, {user?.username}! 👋
+                Welcome back, {user?.displayName}! 👋
               </h1>
               <p className="text-gray-400">
                 Manage and track your shortened URLs
@@ -159,10 +159,13 @@ export default function Dashboard() {
 
         {/* Quick URL Form */}
         {showUrlForm && (
-          <div className="mb-8 animate-slideDown">
+          <div className="mb-8 animate-slideDown relative">
+            <div
+              onClick={() => setShowUrlForm(false)}
+              className="absolute top-3 right-5 md:text-2xl cursor-pointer text-white z-10">X</div>
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6">
               <h3 className="text-xl font-semibold text-white mb-4">Create New Short Link</h3>
-              <UrlForm />
+              <UrlForm onSubmit={() => queryClient.invalidateQueries({ queryKey: ["userUrls"] })} />
             </div>
           </div>
         )}

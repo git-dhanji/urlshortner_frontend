@@ -8,8 +8,8 @@ import ToastMessage from "../../utils/toast";
 
 export default function LoginForm({ state }) {
   const [form, setForm] = useState({
-    email: "demo@gmail.cp",
-    password: "demo123",
+    email: "",
+    password: "",
   });
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -38,10 +38,20 @@ export default function LoginForm({ state }) {
     }
   };
 
+
+
+  const handleGoogleLogin = async () => {
+    const data = window.open("http://localhost:4000/auth/google", "_self");
+    console.log(data)
+  };
+
+
+
+
   return (
     <>
       <form
-      id="login"
+        id="login"
         className="w-full  max-w-md mx-auto flex flex-col gap-6 rounded-2xl"
         onSubmit={handleSubmit}
         autoComplete="off"
@@ -74,6 +84,22 @@ export default function LoginForm({ state }) {
           disabled={loading}
           className="w-full mt-2"
         />
+
+        <div className="w-full h-10 lg:grid lg:grid-cols-2  gap-x-2">
+          <div className="">
+            <Button
+              onClick={handleGoogleLogin}
+              className="w-full bg-blue-600"
+              text="login with google"
+            />
+          </div>
+          <div>
+            <Button
+              className="w-full bg-amber-600"
+              text="login with github"
+            />
+          </div>
+        </div>
         <div className="text-center text-gray-200 text-xs mt-2">
           Don't have an account?{" "}
           <span

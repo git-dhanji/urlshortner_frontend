@@ -5,6 +5,10 @@ import { rootRoute } from "./RouteTree";
 import checkAuth from "../utils/helper";
 import SignupPage from "../pages/SignupPage";
 
+import TermsOfService from "../pages/TermsOfService";
+import ContactPage from "../pages/ContactPage";
+import infoPolicy from "../pages/infoPolicy";
+
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
@@ -28,7 +32,7 @@ const dashboardRoute = createRoute({
 const userLoggedRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/user',
-component: HomePage,
+  component: HomePage,
 })
 
 const signupRoute = createRoute({
@@ -44,4 +48,24 @@ const analyticsRoute = createRoute({
   component: AnalyticsPage,
   beforeLoad: checkAuth,
 })
-export { dashboardRoute, homeRoute, authRoute, signupRoute, userLoggedRoute, analyticsRoute };
+
+const infoPolicyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/info-policy',
+  component: infoPolicy,
+})
+
+const termsOfServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/terms',
+  component: TermsOfService,
+})
+
+
+const contactRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/contact',
+  component: ContactPage,
+})
+
+export { dashboardRoute, homeRoute, authRoute, signupRoute, userLoggedRoute, analyticsRoute, termsOfServiceRoute,contactRoute,infoPolicyRoute };

@@ -9,7 +9,7 @@ const pricing = [
     },
     {
         name: "Pro",
-        price: "$9",
+        price: "$3",
         period: "per month",
         features: ["Unlimited links", "Advanced analytics", "Custom domains", "Priority support"],
         popular: true
@@ -24,7 +24,7 @@ const pricing = [
 ]
 export default function PricingSection() {
     return (
-        <section className="py-20 pt-30 px-4">
+        <section id="pricing" className="py-20 pt-30 px-4">
             <div className="max-w-7xl mx-auto text-center">
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 font-space-grotesk">
                     Choose Your Plan
@@ -61,6 +61,7 @@ export default function PricingSection() {
                                     </li>
                                 ))}
                             </ul>
+                            
                             <button className={`w-full cursor-pointer py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${plan.popular
                                 ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:from-indigo-400 hover:to-purple-500'
                                 : 'bg-slate-700 text-white hover:bg-slate-600'

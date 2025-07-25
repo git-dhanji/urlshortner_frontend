@@ -4,21 +4,14 @@ import { Link } from "@tanstack/react-router";
 import { useNavigate } from "@tanstack/react-router";
 import { useSelector } from "react-redux";
 import AvatarLogo from "./logos/AvatarLogo";
+import { userAllUrls } from "../apis/user.apis";
 
 export default function Navbar() {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
-  
   const navigate = useNavigate();
-  const shortId = ''
-  const { isDarkMode } = { isDarkMode: true }
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-
-  // const [toggleTheme, setToggleTheme] = useState(false)
-  const toggleTheme = () => {
-    alert("make this")
-  }
-
+  const [dynamicAnalyticsLinks, SetDynamicAnalyticsLinks] = useState('')
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -39,17 +32,29 @@ export default function Navbar() {
     return () => document.removeEventListener('click', handleClickOutside);
   }, [isMobileMenuOpen]);
 
+  useEffect(() => {
+    const loadUrl = async () => {
+      const data = await userAllUrls();
+      console.log('all url', data)
+      if (data) {
+        SetDynamicAnalyticsLinks(data[0]?.short_url)
+      }
+    }
+    loadUrl()
+  }, [])
+
+
   const navLinks = [
-    { name: "Home", href: "#home", icon: "🏠" },
-    { name: "Features", href: "#features", icon: "⚡" },
-    { name: "Pricing", href: "#pricing", icon: "💎" },
-    { name: "Devtools", href: "#devtools", icon: "ℹ️" },
-    { name: "Contact", href: "#contact", icon: "📧" },
+    { name: "Home", to: "#home", icon: "🏠" },
+    { name: "Features", to: "#features", icon: "⚡" },
+    { name: "Pricing", to: "#pricing", icon: "💎" },
+    { name: "Devtools", to: "#devtools", icon: "ℹ️" },
+    { name: "Contact", to: "#contact", icon: "📧" },
   ];
 
   const authenticatedLinks = [
-    { name: "Analytics", href: `user/analytics/${shortId ? shortId : 'checks'}`, icon: "📈" },
-    { name: "Dashboard", href: "user/dashboard", icon: "🔗" },
+    { name: "Analytics", to: `user/analytics/${dynamicAnalyticsLinks}`, icon: "📈", onclick: "" },
+    { name: "Dashboard", to: "user/dashboard", icon: "🔗" },
   ];
 
   return (
@@ -58,7 +63,7 @@ export default function Navbar() {
         ? 'bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-lg'
         : 'bg-slate-950/90 backdrop-blur-sm border-b border-slate-800/50'
         }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
 
             {/* Logo */}
@@ -69,17 +74,21 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-1">
+            <div className="hidden lg:flex items-center space-x-1 ">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
-                  to={link.href}
+                  to={link.to}
                   className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50"
                 >
                   <span className="flex items-center space-x-2">
-                    <span>{link.name}</span>
+                    <span className="text-sm group-hover:scale-110 transition-transform duration-200">
+                      {link.icon}
+                    </span>
+                    {/* <span>{link.name}</span> */}
+                    {link.name}
                   </span>
-                  <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-green-700 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-2xl"></div>
+                  <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-600 group-hover:w-full group-hover:left-0 transition-all duration-300"></div>
                 </Link>
               ))}
 
@@ -89,19 +98,21 @@ export default function Navbar() {
               {isAuthenticated && (
                 <div className="ml-4  flex items-center  border-l border-slate-700">
                   {authenticatedLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      to={link.href}
-                      className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50 ml-1"
-                    >
-                      <span className="flex items-center space-x-2">
-                        <span className="text-sm group-hover:scale-110 transition-transform duration-200">
-                          {link.icon}
+                    dynamicAnalyticsLinks ? (
+                      <Link
+                        key={link.name}
+                        to={link.to}
+                        className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50 ml-1"
+                      >
+                        <span className="flex items-center space-x-2">
+                          <span className="text-sm group-hover:scale-110 transition-transform duration-200">
+                            {link.icon}
+                          </span>
+                          <span>{link.name}</span>
                         </span>
-                        <span>{link.name}</span>
-                      </span>
-                      <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-600 group-hover:w-full group-hover:left-0 transition-all duration-300"></div>
-                    </Link>
+                        <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-600 group-hover:w-full group-hover:left-0 transition-all duration-300"></div>
+                      </Link>
+                    ) : null
                   ))}
                 </div>
               )}
@@ -109,46 +120,6 @@ export default function Navbar() {
 
             {/* Right side: Theme toggle & Auth */}
             <div className="flex items-center space-x-4">
-              {/* Theme Toggle */}
-              <button
-                onClick={toggleTheme}
-                className="relative p-2 rounded-xl bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300 group"
-                aria-label="Toggle theme"
-              >
-                <div className="relative w-6 h-6">
-                  {/* Sun Icon */}
-                  <svg
-                    className={`absolute inset-0 w-6 h-6 text-yellow-400 transition-all duration-300 ${isDarkMode ? 'opacity-0 rotate-90 scale-0' : 'opacity-100 rotate-0 scale-100'
-                      }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"
-                    />
-                  </svg>
-                  {/* Moon Icon */}
-                  <svg
-                    className={`absolute inset-0 w-6 h-6 text-indigo-400 transition-all duration-300 ${isDarkMode ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-0'
-                      }`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-                    />
-                  </svg>
-                </div>
-              </button>
-
               {/* Authentication */}
               {isAuthenticated ? (
                 <div className="flex items-center space-x-3">
@@ -213,7 +184,7 @@ export default function Navbar() {
               {navLinks.map((link, index) => (
                 <Link
                   key={link.name}
-                  to={link.href}
+                  to={link.to}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="group flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-slate-800/50 transition-all duration-300 transform hover:translate-x-2"
                   style={{ animationDelay: `${index * 0.1}s` }}
@@ -236,7 +207,7 @@ export default function Navbar() {
                   {authenticatedLinks.map((link, index) => (
                     <Link
                       key={link.name}
-                      to={link.href}
+                      to={link.to}
                       onClick={() => setIsMobileMenuOpen(false)}
                       className="group flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-slate-800/50 transition-all duration-300 transform hover:translate-x-2"
                       style={{ animationDelay: `${(navLinks.length + index) * 0.1}s` }}
@@ -285,7 +256,7 @@ export default function Navbar() {
                     className="ring-2 ring-slate-700"
                   />
                   <div>
-                    <p className="text-white font-medium">{user?.username}</p>
+                    <p className="text-white font-medium">{user?.displayName}</p>
                     <p className="text-gray-400 text-sm">Premium Member</p>
                   </div>
                   <button

@@ -1,7 +1,6 @@
 import axiosInstance from "../utils/axiosInstance.utils";
 
 export const registerUser = async (username, email, password) => {
-  console.log(username, email, password);
   const response = await axiosInstance.post("/api/auth/register", {
     username,
     email,
@@ -18,10 +17,15 @@ export const loginUser = async (email, password) => {
   return response;
 };
 
+
+
 export const logoutUser = async () => {
   const response = await axiosInstance.get("/api/auth/logout");
   return response;
 };
+
+
+
 
 export const getCurrentUserData = async () => {
   try {
@@ -33,6 +37,9 @@ export const getCurrentUserData = async () => {
     throw new Error(error);
   }
 };
+
+
+
 
 export const userAllUrls = async () => {
   try {

@@ -14,18 +14,20 @@ export function Empty() {
 export default function RootLayout() {
   const dispatch = useDispatch();
   useEffect(() => {
+    //check user 
     const fetchUser = async () => {
       try {
         const user = await getCurrentUserData();
         if (user) {
           dispatch(login(user));
-          ToastMessage(`welcome back ${user.username}`)
+          ToastMessage(`welcome back ${user.displayName}`);
         } else redirect({ to: "/auth" });
       } catch (err) { }
     };
 
     fetchUser();
   }, []);
+
 
   return (
     <>
