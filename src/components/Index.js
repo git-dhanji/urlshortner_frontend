@@ -17,8 +17,10 @@ import HowItsWorksSection from "./sections/HowItsWorksSection";
 import CTAButton, { PrimaryCTA, SecondaryCTA, OutlineCTA, GetStartedCTA, LearnMoreCTA, DashboardCTA } from "./buttons/CTAButton";
 import AnalyticsHeader from "./analytics/AnalyticsHeader";
 import ContactSection from "./sections/ContactSection";
+import LoginWithGoogleButton from "./buttons/LoginWithGoogle";
 
 export {
+  LoginWithGoogleButton,
   AnalyticsHeader,
   HowItsWorksSection,
   HeroSection,

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Input, Button } from "../Index";
+import { Input, Button, LoginWithGoogleButton } from "../Index";
 import axiosInstance from "../../utils/axiosInstance.utils";
 import { login } from "../../store/slice/authslice";
 import { useNavigate } from "@tanstack/react-router";
 import ToastMessage from "../../utils/toast";
+import LoginWithGitHubButton from "../buttons/LoginWithGithub";
 
 export default function LoginForm({ state }) {
   const [form, setForm] = useState({
@@ -38,6 +39,10 @@ export default function LoginForm({ state }) {
     }
   };
 
+  const handleGithubLogin = async () => {
+    const data = "working on"
+    alert(data)
+  };
 
 
   const handleGoogleLogin = async () => {
@@ -56,7 +61,7 @@ export default function LoginForm({ state }) {
         onSubmit={handleSubmit}
         autoComplete="off"
       >
-        <h2 className="text-2xl font-space-gro font-bold text-center dark:text-amber-50 mb-2 text-black">
+        <h2 className="text-2xl font-space-gro font-bold text-center dark:text-amber-50 mb-2 text-black ">
           Login to your account
         </h2>
         <Input
@@ -85,18 +90,15 @@ export default function LoginForm({ state }) {
           className="w-full mt-2"
         />
 
-        <div className="w-full h-10 lg:grid lg:grid-cols-2  gap-x-2">
-          <div className="">
-            <Button
+        <div className="w-full lg:h-10 h-auto lg:grid lg:grid-cols-2  gap-x-2">
+          <div className="h-10 lg:mb-0 mb-3">
+            <LoginWithGoogleButton
               onClick={handleGoogleLogin}
-              className="w-full bg-blue-600"
-              text="login with google"
             />
           </div>
-          <div>
-            <Button
-              className="w-full bg-amber-600"
-              text="login with github"
+          <div className="h-10">
+            <LoginWithGitHubButton
+              onClick={handleGithubLogin}
             />
           </div>
         </div>
