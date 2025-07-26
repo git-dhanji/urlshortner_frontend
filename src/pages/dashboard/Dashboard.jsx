@@ -31,11 +31,7 @@ export default function Dashboard() {
   });
 
 
-  useEffect(() => {
-    if (data) {
-      setAnaId(data[0]?.short_url)
-    }
-  }, [data]);
+ 
 
   const { user } = useSelector((state) => state.auth);
   // Filter and sort URLs
