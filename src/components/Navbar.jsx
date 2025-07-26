@@ -35,7 +35,6 @@ export default function Navbar() {
   useEffect(() => {
     const loadUrl = async () => {
       const data = await userAllUrls();
-      console.log('all url', data)
       if (data) {
         SetDynamicAnalyticsLinks(data[0]?.short_url)
       }
