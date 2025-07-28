@@ -9,16 +9,18 @@ export default function UserHome() {
   const { user } = useSelector((state) => state.auth);
 
 
-  const { data: url = [], isLoading } = useQuery({
-    queryKey: ['userAllUrls'],
+  const { data: url = [] } = useQuery({
+    queryKey: ['userUrls'],
     queryFn: userAllUrls
   })
+
+
 
 
   return (
     <div className="min-h-screen bg-slate-950 ">
       {/* Hero Section */}
-      <UserHero user={user}/>
+      <UserHero user={user} />
       {/* Quick Stats */}
       <QuickStats urls={url} />
       <RecentActivity urls={url} />

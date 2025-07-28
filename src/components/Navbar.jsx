@@ -62,7 +62,7 @@ export default function Navbar() {
         ? 'bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-lg'
         : 'bg-slate-950/90 backdrop-blur-sm border-b border-slate-800/50'
         }`}>
-        <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-0">
           <div className="flex items-center justify-between h-16 lg:h-20">
 
             {/* Logo */}
@@ -81,13 +81,8 @@ export default function Navbar() {
                   className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50"
                 >
                   <span className="flex items-center space-x-2">
-                    <span className="text-sm group-hover:scale-110 transition-transform duration-200">
-                      {link.icon}
-                    </span>
-                    {/* <span>{link.name}</span> */}
                     {link.name}
                   </span>
-                  <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-600 group-hover:w-full group-hover:left-0 transition-all duration-300"></div>
                 </Link>
               ))}
 
@@ -95,7 +90,7 @@ export default function Navbar() {
 
               {/* Authenticated Links */}
               {isAuthenticated && (
-                <div className="ml-4  flex items-center  border-l border-slate-700">
+                <div className="ml-4 pl-2 flex items-center  border-l border-slate-700">
                   {authenticatedLinks.map((link) => (
                     dynamicAnalyticsLinks ? (
                       <Link
@@ -104,12 +99,10 @@ export default function Navbar() {
                         className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50 ml-1"
                       >
                         <span className="flex items-center space-x-2">
-                          <span className="text-sm group-hover:scale-110 transition-transform duration-200">
-                            {link.icon}
-                          </span>
+
                           <span>{link.name}</span>
                         </span>
-                        <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-600 group-hover:w-full group-hover:left-0 transition-all duration-300"></div>
+
                       </Link>
                     ) : null
                   ))}

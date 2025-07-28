@@ -10,7 +10,7 @@ export default function UserHero({ user }) {
 
       <div className="relative max-w-4xl mx-auto text-center">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 font-space-grotesk">
-          Welcome back, <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">{user?.displayName}</span>
+          Welcome back, <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">{user?.displayName || user?.username}</span>
         </h1>
         <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
           Create, manage, and track your short links with powerful analytics.

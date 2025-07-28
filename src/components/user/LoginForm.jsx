@@ -15,7 +15,6 @@ export default function LoginForm({ state }) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const auth = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -46,8 +45,7 @@ export default function LoginForm({ state }) {
 
 
   const handleGoogleLogin = async () => {
-    const data = window.open("http://localhost:4000/auth/google", "_self");
-    console.log(data)
+    window.open("http://localhost:4000/auth/google", "_self");
   };
 
 

@@ -33,7 +33,6 @@ export default function AnalyticsMainSections({ shortId }) {
         queryKey: ["analytics", shortId],
         queryFn: () => fetchAnalytics(shortId),
     });
-
     dispatch(setAnalyticsData(analytics));
 
 
@@ -64,9 +63,6 @@ export default function AnalyticsMainSections({ shortId }) {
         );
     }
 
-
-
-
     return (
         <div className="min-h-screen bg-slate-950">
             {/* Background Effects */}
@@ -77,8 +73,8 @@ export default function AnalyticsMainSections({ shortId }) {
                     {/* Header */}
                     <AnalyticsHeader
                         timeRanges={timeRanges}
-                        analyticsShortUrl={analytics?.url?.shortUrl}
                         analyticsLongUrl="https://www.longurl.com/somepara/en-hi"
+                        analytics={analytics}
                     />
                     {/* Navigation Tabs */}
                     <div className="flex space-x-1 bg-slate-800/50 p-1 rounded-xl">

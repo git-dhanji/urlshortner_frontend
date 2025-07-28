@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import { createShortUrl, createShortUrlWithUser } from "../../apis/createShortUrl.Api";
 import ToastMessage from "../../utils/toast";
 import isValidURL from "../../apis/validator";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function InputWithButton() {
+    const queryClient = useQueryClient();
     const [url, setUrl] = useState("");
     const [slug, setSlug] = useState("");
     const [shortUrl, setShortUrl] = useState("");
@@ -16,7 +18,6 @@ export default function InputWithButton() {
 
     const [validUrl, setValidUrl] = useState(false);
 
-   
     const handleSubmit = async (e) => {
         setLoading(true);
         setShortUrl("");
@@ -39,6 +40,7 @@ export default function InputWithButton() {
                 setUrl("");
                 setSlug("")
             }
+            queryClient.invalidateQueries({ queryKey: ["userUrls"] })
         } catch (err) {
         } finally {
             setLoading(false);

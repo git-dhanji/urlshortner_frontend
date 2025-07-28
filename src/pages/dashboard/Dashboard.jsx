@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { UrlForm } from "../../components/Index";
-import { getCurrentUserData, logoutUser } from "../../apis/user.apis";
-import { login, logout } from "../../store/slice/authslice";
+import { logoutUser } from "../../apis/user.apis";
+import { logout } from "../../store/slice/authslice";
 import { useNavigate } from "@tanstack/react-router";
 import ReToast from "../../utils/toast";
 import { userAllUrls } from "../../apis/user.apis";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import AvatarLogo from "../../components/logos/AvatarLogo";
+import DeleteUrl from "../../components/buttons/DeleteUrl";
+import CopyButton from "../../components/buttons/CopyButton";
 
 export default function Dashboard() {
   const queryClient = useQueryClient();
@@ -23,7 +25,6 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
 
-
   const { data, isLoading } = useQuery({
     queryKey: ["userUrls"],
     queryFn: userAllUrls,
@@ -31,11 +32,11 @@ export default function Dashboard() {
   });
 
 
- 
+
 
   const { user } = useSelector((state) => state.auth);
   // Filter and sort URLs
-  const filteredUrls = data?.filter(url =>
+  const filteredUrls = data?.filter((url) =>
     url.redirect_url.toLowerCase().includes(searchTerm.toLowerCase()) ||
     url.short_url?.toLowerCase().includes(searchTerm.toLowerCase())
   ) || [];
@@ -387,10 +388,11 @@ export default function Dashboard() {
                         </div>
 
                         <div className="flex items-center space-x-2">
+
                           <button
                             onClick={() => copyToClipboard(url?.redirect_url, index)}
                             className={`flex-1 px-3 py-2 text-sm rounded-lg font-medium transition-all duration-200 ${copiedIndex === index
-                              ? 'bg-emerald-500 text-white'
+                              ? 'bg-emerald-100 text-white'
                               : 'bg-slate-600/50 text-gray-300 hover:bg-slate-600 hover:text-white'
                               }`}
                           >
@@ -423,15 +425,17 @@ export default function Dashboard() {
                           </div>
 
                           <div className="flex items-center space-x-2">
-                            <button
-                              onClick={() => copyToClipboard(url.short_url, index)}
-                              className={`px-3 py-2 text-sm rounded-lg font-medium transition-all duration-200 ${copiedIndex === index
-                                ? 'bg-emerald-500 text-white'
-                                : 'bg-slate-600/50 text-gray-300 hover:bg-slate-600 hover:text-white'
-                                }`}
-                            >
-                              {copiedIndex === index ? 'Copied!' : 'Copy'}
-                            </button>
+
+
+                            {/* delete url */}
+                            <DeleteUrl
+                              id={url.short_url}
+                              className="mx-2"
+                            />
+                            <CopyButton
+                              copyText={url.redirect_url}
+                              type="copy-icon"
+                            />
                             <Link
                               to={`/user/analytics/${url.short_url}`}
                               className="px-3 py-2 text-sm bg-indigo-500/20 text-indigo-300 rounded-lg hover:bg-indigo-500/30 transition-all duration-200"
@@ -439,6 +443,7 @@ export default function Dashboard() {
                               Analytics
                             </Link>
                           </div>
+
                         </div>
                       </>
                     )}

@@ -52,3 +52,16 @@ export const userAllUrls = async () => {
     console.log(error);
   }
 };
+
+
+
+export const deleteUrl = async (id) => {
+  try {
+    const { data } = await axiosInstance.delete(`/api/create/${id}`, {
+      withCredentials: true,
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -8,7 +8,6 @@ export default function AnalyticsHeader({
     ButtonText = "Export Data",
     analytics = {}
 }) {
-
     const [timeRange, setTimeRange] = useState("7d");
 
 

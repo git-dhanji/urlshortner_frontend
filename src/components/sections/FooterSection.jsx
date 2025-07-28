@@ -11,7 +11,7 @@ const links = [
   { label: "Custom Urls", url: "/custom" }
 ]
 const legal = [
-  { label: "Privacy Policy", url: "/privacy" },
+  { label: "Privacy Policy", url: "/info-policy" },
   { label: "Terms of Service", url: "/terms" }
 ]
 
