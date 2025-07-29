@@ -26,13 +26,13 @@ export default function DeveloperSection() {
                                 <div>POST /api/v1/links</div>
                                 <div className="text-gray-400">{"{"}</div>
                                 <div className="ml-4">"url": "https://example.com",</div>
-                                <div className="ml-4">"custom": "my-link"</div>
+                                <div className="ml-4">"custom": "my-link" <span className="text-white">//for authenticated dev or user only</span></div>
                                 <div className="text-gray-400">{"}"}</div>
                             </div>
                         </div>
 
                         <div className="bg-slate-800/30 p-6 rounded-xl border border-slate-700/50">
-                            <h3 className="text-2xl font-semibold text-white mb-4">Webhooks</h3>
+                            <h3 className="text-2xl font-semibold text-white mb-4">Webhooks [ working ]</h3>
                             <p className="text-gray-300 mb-4">
                                 Real-time notifications for link events and analytics updates.
                             </p>

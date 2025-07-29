@@ -1,28 +1,18 @@
+import { useSelector } from 'react-redux'
+import handlePayment from '../../apis/payment'
 
-const pricing = [
-    {
-        name: "Free",
-        price: "$0",
-        period: "forever",
-        features: ["1,000 links/month", "Basic analytics", "Standard support"],
-        popular: false
-    },
-    {
-        name: "Pro",
-        price: "$3",
-        period: "per month",
-        features: ["Unlimited links", "Advanced analytics", "Custom domains", "Priority support"],
-        popular: true
-    },
-    {
-        name: "Enterprise",
-        price: "Custom",
-        period: "pricing",
-        features: ["Everything in Pro", "Team collaboration", "API access", "Dedicated support"],
-        popular: false
-    }
-]
+
 export default function PricingSection() {
+    const { user } = useSelector(state => state.auth)
+
+
+    const paymentHandler = async (user, amount, plan) => {
+
+        const res = await handlePayment({ userId: user?._id, amount, plan })
+        console.log(res)
+
+    }
+
     return (
         <section id="pricing" className="py-20 pt-30 px-4">
             <div className="max-w-7xl mx-auto text-center">
@@ -61,11 +51,13 @@ export default function PricingSection() {
                                     </li>
                                 ))}
                             </ul>
-                            
-                            <button className={`w-full cursor-pointer py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${plan.popular
-                                ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:from-indigo-400 hover:to-purple-500'
-                                : 'bg-slate-700 text-white hover:bg-slate-600'
-                                }`}>
+
+                            <button
+                                onClick={() => paymentHandler(user, plan.amount, plan.name)}
+                                className={`w-full cursor-pointer py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${plan.popular
+                                    ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:from-indigo-400 hover:to-purple-500'
+                                    : 'bg-slate-700 text-white hover:bg-slate-600'
+                                    }`}>
                                 {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
                             </button>
                         </div>
@@ -75,3 +67,31 @@ export default function PricingSection() {
         </section>
     )
 }
+
+
+const pricing = [
+    {
+        name: "demo",
+        price: "$0.1",
+        amount: 1,
+        period: "forever",
+        features: ["1,000 links/month", "Basic analytics", "Standard support"],
+        popular: false
+    },
+    {
+        name: "Pro",
+        price: "$3",
+        amount: 3,
+        period: "per month",
+        features: ["Unlimited links", "Advanced analytics", "Custom domains", "Priority support"],
+        popular: true
+    },
+    {
+        name: "Enterprise",
+        price: "Custom",
+        amount: Number(300),
+        period: "pricing",
+        features: ["Everything in Pro", "Team collaboration", "API access", "Dedicated support"],
+        popular: false
+    }
+]

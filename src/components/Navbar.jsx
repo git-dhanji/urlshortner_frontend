@@ -6,12 +6,16 @@ import { useSelector } from "react-redux";
 import AvatarLogo from "./logos/AvatarLogo";
 import { userAllUrls } from "../apis/user.apis";
 
+
+
 export default function Navbar() {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [dynamicAnalyticsLinks, SetDynamicAnalyticsLinks] = useState('')
+  const [isActive, setIsActive] = useState('Home')
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -39,8 +43,10 @@ export default function Navbar() {
         SetDynamicAnalyticsLinks(data[0]?.short_url)
       }
     }
-    loadUrl()
-  }, [])
+    if (user) {
+      loadUrl()
+    }
+  }, [user])
 
 
   const navLinks = [
@@ -51,10 +57,13 @@ export default function Navbar() {
     { name: "Contact", to: "#contact", icon: "📧" },
   ];
 
+
   const authenticatedLinks = [
     { name: "Analytics", to: `user/analytics/${dynamicAnalyticsLinks}`, icon: "📈", onclick: "" },
     { name: "Dashboard", to: "user/dashboard", icon: "🔗" },
   ];
+
+
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
@@ -78,15 +87,14 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   to={link.to}
-                  className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50"
+                  onClick={() => setIsActive(link.name)}
+                  className={`group relative px-4 py-2 rounded-xl text-gray-300 hover:text-teal-100 transition-all  ${isActive == link.name ? `text-white font-medium transition-all duration-300 bg-slate-800 hover:text-white` : ``}`}
                 >
                   <span className="flex items-center space-x-2">
                     {link.name}
                   </span>
                 </Link>
               ))}
-
-
 
               {/* Authenticated Links */}
               {isAuthenticated && (
@@ -99,7 +107,6 @@ export default function Navbar() {
                         className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50 ml-1"
                       >
                         <span className="flex items-center space-x-2">
-
                           <span>{link.name}</span>
                         </span>
 
@@ -111,7 +118,7 @@ export default function Navbar() {
             </div>
 
             {/* Right side: Theme toggle & Auth */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 ">
               {/* Authentication */}
               {isAuthenticated ? (
                 <div className="flex items-center space-x-3">
@@ -295,3 +302,5 @@ export default function Navbar() {
     </div>
   );
 }
+
+

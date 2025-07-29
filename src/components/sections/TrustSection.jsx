@@ -8,10 +8,10 @@ const trust = [
 export default function TrustSection() {
     return (
 
-        <div className="w-dvw flex items-center justify-center">
-            <div className=" grid  grid-cols-2 gap-10  md:grid-cols-4 lg:gap-x-50 md:gap-x-20 mb-16 animate-slideUp" style={{ animationDelay: '0.4s' }}>
+        <div className="w-dvw flex items-center justify-center max-w-7xl">
+            <div className=" grid grid-cols-2 gap-10  md:grid-cols-4 cursor-pointer md:gap-x-22 lg:gap-x-30 mb-16 animate-slideUp" style={{ animationDelay: '0.4s' }}>
                 {trust.map((stat, index) => (
-                    <div key={index} className="text-center group">
+                    <div key={index} className="text-center group p-5 bg-gray-900 rounded-md">
                         <div className="text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
                             {stat.icon}
                         </div>

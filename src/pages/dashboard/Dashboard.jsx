@@ -23,18 +23,15 @@ export default function Dashboard() {
   const [viewMode, setViewMode] = useState('list'); // grid or list
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
 
-
+  
   const { data, isLoading } = useQuery({
     queryKey: ["userUrls"],
     queryFn: userAllUrls,
     refetchInterval: 30000,
   });
 
-
-
-
-  const { user } = useSelector((state) => state.auth);
   // Filter and sort URLs
   const filteredUrls = data?.filter((url) =>
     url.redirect_url.toLowerCase().includes(searchTerm.toLowerCase()) ||

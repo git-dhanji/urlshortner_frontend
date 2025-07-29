@@ -13,7 +13,6 @@ export const checkAuth = async ({ context }) => {
 
     if (!user) return false;
     store.dispatch(login(user));
-
     return true;
   } catch (error) {
     return redirect({
