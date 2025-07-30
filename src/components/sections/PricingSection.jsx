@@ -1,15 +1,14 @@
 import { useSelector } from 'react-redux'
 import handlePayment from '../../apis/payment'
-
+import { useNavigate } from '@tanstack/react-router'
 
 export default function PricingSection() {
     const { user } = useSelector(state => state.auth)
 
-
     const paymentHandler = async (user, amount, plan) => {
 
         const res = await handlePayment({ userId: user?._id, amount, plan })
-        console.log(res)
+     
 
     }
 
@@ -53,7 +52,9 @@ export default function PricingSection() {
                             </ul>
 
                             <button
-                                onClick={() => paymentHandler(user, plan.amount, plan.name)}
+                                onClick={() =>
+                                    user ? paymentHandler(user, plan.amount, plan.name) : alert('login first')
+                                }
                                 className={`w-full cursor-pointer py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${plan.popular
                                     ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:from-indigo-400 hover:to-purple-500'
                                     : 'bg-slate-700 text-white hover:bg-slate-600'
