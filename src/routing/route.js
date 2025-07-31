@@ -8,6 +8,7 @@ import SignupPage from "../pages/SignupPage";
 import TermsOfService from "../pages/TermsOfService";
 import ContactPage from "../pages/ContactPage";
 import infoPolicy from "../pages/infoPolicy";
+import PremiumPage from "../pages/PremiumPage";
 
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -21,13 +22,6 @@ const authRoute = createRoute({
   component: AuthPage,
 });
 
-const dashboardRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/user/dashboard",
-  component: Dashboard,
-  beforeLoad: checkAuth,
-});
-
 
 const userLoggedRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -35,19 +29,14 @@ const userLoggedRoute = createRoute({
   component: HomePage,
 })
 
+
+
 const signupRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/signup',
   component: SignupPage,
 })
 
-
-const analyticsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/user/analytics/$shortId',
-  component: AnalyticsPage,
-  beforeLoad: checkAuth,
-})
 
 const infoPolicyRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -68,4 +57,28 @@ const contactRoute = createRoute({
   component: ContactPage,
 })
 
-export { dashboardRoute, homeRoute, authRoute, signupRoute, userLoggedRoute, analyticsRoute, termsOfServiceRoute,contactRoute,infoPolicyRoute };
+//authenticated route
+
+const analyticsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/user/analytics/$shortId',
+  component: AnalyticsPage,
+  beforeLoad: checkAuth,
+})
+
+
+const dashboardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/user/dashboard",
+  component: Dashboard,
+  beforeLoad: checkAuth,
+});
+
+const premiumRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/user/premium',
+  component: PremiumPage,
+  beforeLoad: checkAuth,
+})
+
+export { dashboardRoute, homeRoute, authRoute, signupRoute, userLoggedRoute, analyticsRoute, termsOfServiceRoute, contactRoute, infoPolicyRoute ,premiumRoute};

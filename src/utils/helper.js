@@ -11,6 +11,7 @@ export const checkAuth = async ({ context }) => {
       retry: false,
     });
 
+
     if (!user) return false;
     store.dispatch(login(user));
     return true;

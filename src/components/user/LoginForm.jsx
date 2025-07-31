@@ -8,6 +8,7 @@ import ToastMessage from "../../utils/toast";
 import LoginWithGitHubButton from "../buttons/LoginWithGithub";
 
 export default function LoginForm({ state }) {
+  const baseUri = import.meta.env.VITE_SERVER_URI
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -45,7 +46,7 @@ export default function LoginForm({ state }) {
 
 
   const handleGoogleLogin = async () => {
-    window.open("http://localhost:4000/auth/google", "_self");
+    window.open(`${baseUri}/auth/google`, "_self");
   };
 
 

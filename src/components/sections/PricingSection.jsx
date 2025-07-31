@@ -1,15 +1,21 @@
 import { useSelector } from 'react-redux'
 import handlePayment from '../../apis/payment'
+import { useDispatch } from 'react-redux'
+import auth from '../../store/slice/authslice'
 import { useNavigate } from '@tanstack/react-router'
 
 export default function PricingSection() {
+    const navigate = useNavigate();
     const { user } = useSelector(state => state.auth)
-
+    const dispatch = useDispatch()
     const paymentHandler = async (user, amount, plan) => {
-
-        const res = await handlePayment({ userId: user?._id, amount, plan })
-     
-
+        try {
+            const res = await handlePayment({ userId: user?._id, amount, plan })
+            dispatch(auth(res?.data))
+            navigate({ to: '/subscribe/premium' })
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -35,7 +41,7 @@ export default function PricingSection() {
                                     </span>
                                 </div>
                             )}
-                            <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2">{plan?.name}</h3>
                             <div className="mb-6">
                                 <span className="text-4xl font-bold text-white">{plan.price}</span>
                                 <span className="text-gray-400 ml-2">{plan.period}</span>
@@ -53,7 +59,7 @@ export default function PricingSection() {
 
                             <button
                                 onClick={() =>
-                                    user ? paymentHandler(user, plan.amount, plan.name) : alert('login first')
+                                    user ? paymentHandler(user, plan?.amount, plan?.name) : alert('login first')
                                 }
                                 className={`w-full cursor-pointer py-3 px-6 rounded-xl font-semibold transition-all duration-300 ${plan.popular
                                     ? 'bg-gradient-to-r from-indigo-500 to-purple-600 text-white hover:from-indigo-400 hover:to-purple-500'
@@ -72,10 +78,10 @@ export default function PricingSection() {
 
 const pricing = [
     {
-        name: "demo",
-        price: "$0.1",
+        name: "trail",
+        price: "$1",
         amount: 1,
-        period: "forever",
+        period: "monthly",
         features: ["1,000 links/month", "Basic analytics", "Standard support"],
         popular: false
     },

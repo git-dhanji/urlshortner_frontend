@@ -32,6 +32,7 @@ export const getCurrentUserData = async () => {
     const { data } = await axiosInstance.get("/api/auth/me", {
       withCredentials: true,
     });
+    
     return data.user;
   } catch (error) {
     throw new Error(error);

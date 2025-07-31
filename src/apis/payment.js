@@ -1,7 +1,6 @@
 import axiosInstance from "../utils/axiosInstance.utils"
 
-const handlePayment = async ({ userId = "", amount, plan, currency = "USD" }) => {
-
+const handlePayment = async ({ userId, amount, plan, currency = "USD" }) => {
 
     const loadRazorpayScript = () => {
         return new Promise((resolve) => {
@@ -23,12 +22,10 @@ const handlePayment = async ({ userId = "", amount, plan, currency = "USD" }) =>
     }
 
 
-
     const mainAmount = amount * 100
     if (!userId || !mainAmount) {
         throw new Error("userId and mainAmount must be needed")
     }
-
 
     const { data } = await axiosInstance.post('/api/payment/create-order', { userId, amount: mainAmount, plan, currency }, { withCredentials: true })
 

@@ -4,15 +4,17 @@ import { useSelector } from "react-redux";
 import { FeaturesSection, HeroSection, HowItsWorksSection, ContactSection } from "../components/Index";
 import TestimonialSection from "../components/sections/TestimonialSection";
 
+
+
 import UserHome from "./UserHome";
 import PricingSection from "../components/sections/PricingSection";
 
+
 function HomePage() {
-  const {  isAuthenticated } = useSelector((state) => state.auth);
+   
+  const { isAuthenticated } = useSelector((state) => state.auth);
   return (
     <div id="home" className="min-h-screen bg-slate-950 overflow-hidden pt-10">
-      {/* Hero Section */}
-
       {
         isAuthenticated ? (<>
           <UserHome />
