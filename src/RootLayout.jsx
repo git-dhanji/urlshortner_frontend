@@ -18,6 +18,7 @@ export default function RootLayout() {
     const fetchUser = async () => {
       try {
         const user = await getCurrentUserData();
+        console.log(user)
         if (user) {
           dispatch(login(user));
           ToastMessage(`welcome back ${user.displayName}`);

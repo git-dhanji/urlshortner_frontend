@@ -64,7 +64,6 @@ export default function Navbar() {
   ];
 
 
-
   return (
     <div className="fixed top-0 left-0 right-0 z-50">
       <nav className={`transition-all duration-300 ${isScrolled
@@ -77,7 +76,10 @@ export default function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex-shrink-0 group">
               <div className="transform group-hover:scale-105 transition-transform duration-200">
-                <Logo />
+                <Logo
+                  userDisplayName={user?.displayName}
+                  isSubscribe={user?.isSubscribe}
+                />
               </div>
             </Link>
 
@@ -88,7 +90,11 @@ export default function Navbar() {
                   key={link.name}
                   to={link.to}
                   onClick={() => setIsActive(link.name)}
-                  className={`group relative px-4 py-2 rounded-xl text-gray-300 hover:text-teal-100 transition-all  ${isActive == link.name ? `text-white font-medium transition-all duration-300 bg-slate-800 hover:text-white` : ``}`}
+                  className={`
+                    group relative px-4 py-2 rounded-xl  transition-all duration-400 ease-in-out  
+                    ${isActive == link.name ? ` font-medium  
+                      ${user?.isSubscribe ? 'bg-amber-300 text-black' : 'bg-slate-600 text-white'} `
+                      : `text-white hover:bg-slate-800`}`}
                 >
                   <span className="flex items-center space-x-2">
                     {link.name}
@@ -102,9 +108,14 @@ export default function Navbar() {
                   {authenticatedLinks.map((link) => (
                     dynamicAnalyticsLinks ? (
                       <Link
+                       onClick={() => setIsActive(link.name)}
                         key={link.name}
                         to={link.to}
-                        className="group relative px-4 py-2 rounded-xl text-gray-300 hover:text-white font-medium transition-all duration-300 hover:bg-slate-800/50 ml-1"
+                        className={`
+                    group relative px-4 py-2 rounded-xl  transition-all duration-400 ease-in-out  
+                    ${isActive == link.name ? ` font-medium  
+                      ${user?.isSubscribe ? 'bg-amber-300 text-black' : 'bg-slate-600 text-white'} `
+                            : `text-white hover:bg-slate-800`}`}
                       >
                         <span className="flex items-center space-x-2">
                           <span>{link.name}</span>
@@ -122,9 +133,9 @@ export default function Navbar() {
               {/* Authentication */}
               {isAuthenticated ? (
                 <div className="flex items-center space-x-3">
-
                   <div className="relative group">
                     <AvatarLogo
+                      premiumUser={user?.isSubscribe}
                       url={user?.avatar}
                       onClick={() => navigate({ to: '/user/dashboard' })}
                     />
@@ -135,7 +146,6 @@ export default function Navbar() {
               ) : (
                 <div className="hidden sm:flex items-center space-x-3">
                   <Link
-
                     to="/auth"
                     className="px-4 py-2 text-gray-300 hover:text-white font-medium transition-colors duration-200"
                   >

@@ -1,8 +1,8 @@
-export default function WebLogo() {
+export default function WebLogo({ isSubscribe,userDisplayName=''}){
   return (
     <>
       <div>
-        <span className="flex items-center gap-2 font-bold text-xl tracking-tight font-space-gro">
+        <span className="flex items-center gap-2  text-xl tracking-tight font-space-gro">
           <svg
             width="32"
             height="32"
@@ -24,7 +24,11 @@ export default function WebLogo() {
               strokeLinecap="round"
             />
           </svg>
-          <span className="text-primary dark:text-indigo-300">Shortly</span>
+          <div className="relative  w-full">
+            <span className="text-primary dark:text-indigo-300 font-bold">Shortly</span>
+            <span className="absolute font-poppins top-5 text-[13px] font-extralight left-0 text-amber-300 text-nowrap"> {isSubscribe && userDisplayName}</span>
+          </div>
+
         </span>
       </div>
     </>

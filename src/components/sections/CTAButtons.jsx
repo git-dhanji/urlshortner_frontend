@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 export default function CTAButtons() {
     return (
+        
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 animate-slideUp" style={{ animationDelay: '0.6s' }}>
             <Link
                 to="/signup"
