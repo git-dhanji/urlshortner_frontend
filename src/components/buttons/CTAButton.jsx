@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 
 export default function CTAButton({
   text = "Get Started",
-  href = "/signup",
+  href = "/",
   variant = "primary", // primary, secondary, outline
   size = "md", // sm, md, lg
   icon = null,
@@ -12,7 +12,7 @@ export default function CTAButton({
   loading = false,
   fullWidth = false
 }) {
-  const baseClasses = "inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none";
+  const baseClasses = "inline-flex items-center justify-center font-semibold  transition-all duration-300 transform hover:scale-105 focus:outline-none  disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none";
   
   const sizeClasses = {
     sm: "px-4 py-2 text-sm",
