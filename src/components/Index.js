@@ -18,8 +18,18 @@ import CTAButton, { PrimaryCTA, SecondaryCTA, OutlineCTA, GetStartedCTA, LearnMo
 import AnalyticsHeader from "./analytics/AnalyticsHeader";
 import ContactSection from "./sections/ContactSection";
 import LoginWithGoogleButton from "./buttons/LoginWithGoogle";
+import GridBox from "./box/GridBox";
+import ListBox from "./box/ListBox";
+import HeaderDashboard from "./dashboard/Header.dsb";
+import DashboardLoader from "./dashboard/DashboardLoader";
+import ShowBoxesDsb from "./dashboard/ShowBoxes.dsb";
 
 export {
+  ShowBoxesDsb,
+  DashboardLoader,
+  HeaderDashboard,
+  ListBox,
+  GridBox,
   LoginWithGoogleButton,
   AnalyticsHeader,
   HowItsWorksSection,
