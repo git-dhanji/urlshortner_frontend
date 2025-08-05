@@ -8,7 +8,7 @@ import ToastMessage from "../../utils/toast";
 import LoginWithGitHubButton from "../buttons/LoginWithGithub";
 
 export default function LoginForm({ state }) {
-  const baseUri = import.meta.env.VITE_SERVER_URI
+  const baseUri = import.meta.env.VITE_SERVER_URI;
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -40,17 +40,13 @@ export default function LoginForm({ state }) {
   };
 
   const handleGithubLogin = async () => {
-    const data = "working on"
-    alert(data)
+    const data = "working on";
+    alert(data);
   };
-
 
   const handleGoogleLogin = async () => {
     window.open(`${baseUri}/auth/google`, "_self");
   };
-
-
-
 
   return (
     <>
@@ -89,16 +85,9 @@ export default function LoginForm({ state }) {
           className="w-full mt-2"
         />
 
-        <div className="w-full lg:h-10 h-auto lg:grid lg:grid-cols-2  gap-x-2">
+        <div className="w-full lg:h-10 h-auto lg:grid">
           <div className="h-10 lg:mb-0 mb-3">
-            <LoginWithGoogleButton
-              onClick={handleGoogleLogin}
-            />
-          </div>
-          <div className="h-10">
-            <LoginWithGitHubButton
-              onClick={handleGithubLogin}
-            />
+            <LoginWithGoogleButton onClick={handleGoogleLogin} />
           </div>
         </div>
         <div className="text-center text-gray-200 text-xs mt-2">

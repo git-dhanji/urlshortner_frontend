@@ -8,7 +8,6 @@ export const createShortUrl = async (url) => {
 };
 
 export const createShortUrlWithUser = async ({ ...user }) => {
-
   const { data } = await axiosInstance.post("/api/create", user);
   return data;
 };
