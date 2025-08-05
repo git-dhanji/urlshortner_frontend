@@ -2,7 +2,7 @@ export default function LoginWithGoogleButton({ onClick, className = "" }) {
     return (
         <button
             onClick={onClick}
-            className={`flex items-center justify-evenly cursor-pointer w-full h-full  bg-slate-800 border border-slate-600 rounded-lg hover:bg-slate-700 transition-all duration-200 ${className}`}
+            className={`flex items-center justify-center space-x-4 cursor-pointer w-full h-full  bg-slate-800 border border-slate-600 rounded-lg hover:bg-slate-700 transition-all duration-200 ${className}`}
         >
             {/* Google Icon SVG */}
             <svg
