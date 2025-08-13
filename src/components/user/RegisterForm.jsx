@@ -36,7 +36,6 @@ export default function RegisterForm({ state, withRedirect, onClick }) {
     setLoading(true);
     try {
       const { data } = await axiosInstance.post("/api/auth/register", form);
-      console.log("data", data)
       const user = data.user;
       dispatch(login(user));
       navigate({ to: "/user/dashboard" });
