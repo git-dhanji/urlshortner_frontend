@@ -6,8 +6,11 @@ import { redirect, useNavigate } from "@tanstack/react-router";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/slice/authslice";
 import ToastMessage from "../../utils/toast";
+import { LoginWithGoogleButton } from "../Index";
 
 export default function RegisterForm({ state, withRedirect, onClick }) {
+
+  const baseUri = import.meta.env.VITE_SERVER_URI;
   const [form, setForm] = useState({
     username: "",
     email: "@gmail.com",
@@ -22,12 +25,17 @@ export default function RegisterForm({ state, withRedirect, onClick }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+
+
+
+  const handleGoogleLogin = async () => {
+    window.open(`${baseUri}/auth/google`, "_self");
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       const { data } = await axiosInstance.post("/api/auth/register", form);
-      console.log("data", data)
       const user = data.user;
       dispatch(login(user));
       navigate({ to: "/user/dashboard" });
@@ -82,6 +90,11 @@ export default function RegisterForm({ state, withRedirect, onClick }) {
           disabled={loading}
           className="w-full mt-2"
         />
+        <div className="w-full lg:h-10 h-auto lg:grid">
+          <div className="h-10 lg:mb-0 mb-3">
+            <LoginWithGoogleButton onClick={handleGoogleLogin} />
+          </div>
+        </div>
         {
           withRedirect ? (<div className="text-center text-gray-200 text-xs mt-2">
             Already have an account?{" "}
