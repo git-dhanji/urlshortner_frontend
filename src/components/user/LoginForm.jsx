@@ -5,7 +5,6 @@ import axiosInstance from "../../utils/axiosInstance.utils";
 import { login } from "../../store/slice/authslice";
 import { useNavigate } from "@tanstack/react-router";
 import ToastMessage from "../../utils/toast";
-import LoginWithGitHubButton from "../buttons/LoginWithGithub";
 
 export default function LoginForm({ state }) {
   const baseUri = import.meta.env.VITE_SERVER_URI;
@@ -39,11 +38,7 @@ export default function LoginForm({ state }) {
     }
   };
 
-  const handleGithubLogin = async () => {
-    const data = "working on";
-    alert(data);
-  };
-
+ 
   const handleGoogleLogin = async () => {
     window.open(`${baseUri}/auth/google`, "_self");
   };
